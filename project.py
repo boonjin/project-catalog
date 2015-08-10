@@ -56,14 +56,16 @@ def fbconnect():
     result = h.request(url, 'GET')[1]
 
     # Use token to get user info from API
-    userinfo_url = "https://graph.facebook.com/v2.4/me"
+    userinfo_url = "https://graph.facebook.com/v2.2/me?fields=name,id,email"
     
     # strip expire tag from access token
     token = result.split("&")[0]
 
 
     # url = 'https://graph.facebook.com/v2.2/me?%s' % token
-    url = 'https://graph.facebook.com/v2.4/me?%s&fields=name,id,email' % token
+    url = 'https://graph.facebook.com/v2.2/me?%s&fields=name,id,email' % token
+    print url
+    
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     # print "url sent for API access:%s"% url
@@ -82,11 +84,12 @@ def fbconnect():
     login_session['access_token'] = stored_token
 
     # Get user picture
-    url = 'https://graph.facebook.com/v2.34/me/picture?%s&redirect=0&height=200&width=200' % token
+    url = 'https://graph.facebook.com/v2.4/me/picture?%s&redirect=0&height=200&width=200' % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
-
+    
+    print data
     login_session['picture'] = data["data"]["url"]
 
     # see if user exists
@@ -110,10 +113,14 @@ def fbconnect():
 
 @app.route('/fbdisconnect')
 def fbdisconnect():
+    print 'login session'
+    print login_session['facebook_id']
+    print login_session['access_token']
     facebook_id = login_session['facebook_id']
     # The access token must me included to successfully logout
     access_token = login_session['access_token']
-    url = 'https://graph.facebook.com/%s/permissions' % (facebook_id,access_token)
+    url = 'https://graph.facebook.com/%s/permissions' % (facebook_id)
+    print url
     h = httplib2.Http()
     result = h.request(url, 'DELETE')[1]
     return "you have been logged out"
@@ -141,6 +148,7 @@ def gconnect():
         return response
 
     # Check that the access token is valid.
+    print credentials
     access_token = credentials.access_token
     url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
            % access_token)
@@ -176,7 +184,7 @@ def gconnect():
         return response
 
     # Store the access token in the session for later use.
-    login_session['credentials'] = credentials
+    login_session['credentials'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
 
     # Get user info
@@ -247,7 +255,11 @@ def gdisconnect():
             json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    access_token = credentials.access_token
+        
+    
+    access_token = credentials
+    # .access_token
+    
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]

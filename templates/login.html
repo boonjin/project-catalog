@@ -79,11 +79,9 @@ function signInCallback(authResult) {
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
+    version    : 'v2.4' // use version 2.2
   });
-
   };
-
   // Load the SDK asynchronously
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -92,14 +90,14 @@ function signInCallback(authResult) {
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function sendTokenToServer() {
     var access_token = FB.getAuthResponse()['accessToken'];
     console.log(access_token)
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
+    FB.api('/me?fields=id,name,email', function(response) {
+      console.log(response);
       console.log('Successful login for: ' + response.name);
      $.ajax({
       type: 'POST',
@@ -115,16 +113,12 @@ function signInCallback(authResult) {
           window.location.href = "/restaurant";
          }, 4000);
           
-
       } else {
         $('#result').html('Failed to make a server-side call. Check your configuration and console.');
          }
-
       }
       
   });
-
-
     });
   }
 </script>
