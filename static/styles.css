@@ -116,11 +116,11 @@ h3 {
 .banner h1 {
 	margin: 45px 0;
 }
- .restaurant-list {
+ .category-list {
  	background-color: #F0F0F0;
  	padding: 20px;
 u }
- .restaurant-list:hover {
+ .category-list:hover {
  	background-color: #e1e17f;
  	padding: 20px;
 }
@@ -129,6 +129,9 @@ u }
 	padding: 20px;
 	margin: 20px;
 	margin-left: -20px;
+}
+.menu-item:hover {
+	background: whitesmoke;
 }
 .menu-price {
 	font-weight: 700;
@@ -160,4 +163,9 @@ u }
 	list-style-type: none;
 	text-align: center;
 
+}
+
+.app img {
+    height: 100px;
+    width: 100px;
 }
