@@ -40,7 +40,7 @@ class App(Base):
     description = Column(String(250))
     image_url = Column(String(250))
     price = Column(String(8))
-    course = Column(String(250))
+#    course = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)
     user_id = Column(Integer, ForeignKey('user.id'))
@@ -54,6 +54,7 @@ class App(Base):
             'description': self.description,
             'id': self.id,
             'price': self.price,
+            'image_url': self.image_url,
           #  'course': self.course,
         }
 
