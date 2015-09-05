@@ -55,7 +55,6 @@ class App(Base):
             'id': self.id,
             'price': self.price,
             'image_url': self.image_url,
-          #  'course': self.course,
         }
 
 

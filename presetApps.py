@@ -20,7 +20,7 @@ session.commit()
 
 
 
-# Apps for Games
+# Create Category: Games and apps for this category
 category1 = Category(user_id=0, name="Games")
 
 session.add(category1)
@@ -46,7 +46,7 @@ session.add(app3)
 session.commit()
 
 
-# Apps for Communication
+# Create Category: Communication and apps for this category
 category1 = Category(user_id=0, name="Communication")
 
 session.add(category1)
@@ -66,7 +66,7 @@ session.add(app2)
 session.commit()
 
 
-# Apps for Productivity
+# Create Category: Productivity and apps for this category
 category1 = Category(user_id=0, name="Productivity")
 
 session.add(category1)
