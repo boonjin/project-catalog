@@ -1,3 +1,6 @@
+"""database_setup.py: setup database schema for appstore catalog"""
+
+
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -6,6 +9,7 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
+# User table to store user data
 class User(Base):
     __tablename__ = 'user'
 
@@ -15,6 +19,7 @@ class User(Base):
     picture = Column(String(250))
 
 
+# Category table to store category data
 class Category(Base):
     __tablename__ = 'category'
 
@@ -32,6 +37,7 @@ class Category(Base):
         }
 
 
+# App table to store app data with relationship with User and Category
 class App(Base):
     __tablename__ = 'app'
 
@@ -40,7 +46,6 @@ class App(Base):
     description = Column(String(250))
     image_url = Column(String(250))
     price = Column(String(8))
-#    course = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)
     user_id = Column(Integer, ForeignKey('user.id'))

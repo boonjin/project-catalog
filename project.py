@@ -1,3 +1,6 @@
+"""project.py: implementation for the appstore catalog server"""
+
+
 from flask import Flask, render_template, request, redirect, jsonify, \
     url_for, flash
 from sqlalchemy import create_engine, asc

@@ -1,3 +1,6 @@
+"""presetApps.py: initialize categories and apps"""
+
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -14,7 +17,10 @@ session = DBSession()
 
 # Create dummy user
 User1 = User(name="Susan Brent", email="susanbrent@alextest123.co",
-             picture='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/p50x50/481902_10150980461973016_480056919_n.jpg?oh=2092e695168a4e4165741a5b1a0819b8&oe=5674C7A7&__gda__=1447372075_f2a6c0b88977be61465cc4bf95cc718b')
+             picture='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1' + 
+             '/v/t1.0-1/p50x50/481902_10150980461973016_480056919_n.jpg?oh=' + 
+             '2092e695168a4e4165741a5b1a0819b8&oe=5674C7A7&__gda__=' + 
+             '1447372075_f2a6c0b88977be61465cc4bf95cc718b')
 session.add(User1)
 session.commit()
 
